@@ -18,6 +18,8 @@ function isPalindrom (str) {
   return cleaned === reversed;
 }
 
+
+
 // Дополнительная задача - извлечение цифр из строки:
 
 
