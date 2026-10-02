@@ -18,10 +18,11 @@ function isPalindrom (str) {
   return cleaned === reversed;
 }
 
-// Дополнительная задача на извлечение цифр из строки:
+// Дополнительная задача - извлечение цифр из строки:
 
 
 function getDigits(value) {
+
   const str = value.toString();
   let digits = '';
 
