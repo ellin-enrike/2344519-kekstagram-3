@@ -35,7 +35,6 @@ function getDigits(value) {
   if (digits === '') {
     return 0;
   }
-
   return parseInt(digits, 10);
 }
 
