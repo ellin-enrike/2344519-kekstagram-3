@@ -9,7 +9,6 @@ function checkStringLenght (stringToValidate, maxLenght) {
 
 const validateStringLength = (validateString, maxStringLenght) => validateString.length <= maxStringLenght;
 
-
 //Функция для проверки, является ли строка палиндромом:
 
 function isPalindrom (str) {
