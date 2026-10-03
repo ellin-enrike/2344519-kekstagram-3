@@ -22,14 +22,12 @@ function isPalindrom (str) {
 
 
 function getDigits(value) {
-
   const str = value.toString();
   let digits = '';
 
   for (const char of str) {
-    const number = parseInt(char, 10);
 
-    if (!Number.isNaN(number)) {
+    if (char >= '0' && char <= '9') {
       digits += char;
     }
   }
