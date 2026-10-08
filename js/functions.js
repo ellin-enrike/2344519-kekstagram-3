@@ -4,18 +4,24 @@ function checkStringLenght (stringToValidate, maxLenght) {
   return stringToValidate.length <= maxLenght;
 }
 
+checkStringLenght()
+
 
 //Функция для проверки длины строки (Вариант 2):
 
 const validateStringLength = (validateString, maxStringLenght) => validateString.length <= maxStringLenght;
 
-//Функция проверяющая, является ли строка палиндромом:
+validateStringLength()
+
+//Функция проверрки строки на палиндром:
 
 function isPalindrom (str) {
   const cleaned = str.replaceAll(' ', '').toLowerCase();
   const reversed = cleaned.split('').reverse().join('');
   return cleaned === reversed;
 }
+
+isPalindrom()
 
 
 // Дополнительная задача - извлечение цифр из строки:
@@ -37,5 +43,7 @@ function getDigits(value) {
   }
   return parseInt(digits, 10);
 }
+
+getDigits()
 
 
