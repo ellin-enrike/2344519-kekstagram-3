@@ -4,14 +4,14 @@ function checkStringLenght (stringToValidate, maxLenght) {
   return stringToValidate.length <= maxLenght;
 }
 
-checkStringLenght()
+checkStringLenght();
 
 
 //Функция для проверки длины строки (Вариант 2):
 
 const validateStringLength = (validateString, maxStringLenght) => validateString.length <= maxStringLenght;
 
-validateStringLength()
+validateStringLength();
 
 //Функция проверрки строки на палиндром:
 
@@ -21,7 +21,7 @@ function isPalindrom (str) {
   return cleaned === reversed;
 }
 
-isPalindrom()
+isPalindrom();
 
 
 // Дополнительная задача - извлечение цифр из строки:
@@ -44,6 +44,6 @@ function getDigits(value) {
   return parseInt(digits, 10);
 }
 
-getDigits()
+getDigits();
 
 
