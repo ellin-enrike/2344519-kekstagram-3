@@ -13,6 +13,7 @@ const validateStringLength = (validateString, maxStringLenght) => validateString
 
 validateStringLength();
 
+
 //Функция проверрки строки на палиндром:
 
 function isPalindrom (str) {
