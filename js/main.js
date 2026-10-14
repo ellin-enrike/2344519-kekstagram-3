@@ -72,4 +72,4 @@ const createPhotoDescription = (index) => {
 const similarPhotoDescriptions = Array.from({ length: SIMILAR_PHOTO_DESCRIPTION_COUNT },(_, index) => createPhotoDescription(index)
 );
 
- console.log(similarPhotoDescriptions);
+
