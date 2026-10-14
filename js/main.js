@@ -69,7 +69,7 @@ const createPhotoDescription = (index) => {
 };
 
 // Финальный массив из 25 объектов
-const similarPhotoDescriptions = Array.from({ length: SIMILAR_PHOTO_DESCRIPTION_COUNT },(_, index) => createPhotoDescription(index)
+export const similarPhotoDescriptions = Array.from({ length: SIMILAR_PHOTO_DESCRIPTION_COUNT },(_, index) => createPhotoDescription(index)
 );
 
 
