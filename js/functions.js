@@ -4,13 +4,13 @@ function checkStringLength (stringToValidate, maxLength) {
   return stringToValidate.length <= maxLength;
 }
 
-checkStringLength("Привет", 10);
+checkStringLength('Привет', 10);
 
 
 //Функция для проверки длины строки (Вариант 2):
 const validateStringLength = (validateString, maxStringLength) => validateString.length <= maxStringLength;
 
-validateStringLength("Привет", 10);
+validateStringLength('Привет', 10);
 
 
 //Функция проверрки строки на палиндром:
@@ -20,7 +20,7 @@ function isPalindrom (str) {
   return cleaned === reversed;
 }
 
-isPalindrom("abba");
+isPalindrom('abba');
 
 
 // Дополнительная задача - извлечение цифр из строки:
@@ -47,7 +47,7 @@ getDigits(7);
 // Задача "Делу время"
 
 function isMeetingInWorkday(startWork, endWork, startMeeting, durationMinutes) {
-  
+
   function timeToMinutes(timeStr) {
     const normalized = timeStr.replace('.', ':');
     const [hoursStr, minutesStr] = normalized.split(':');
