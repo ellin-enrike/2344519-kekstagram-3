@@ -66,3 +66,5 @@ function isMeetingInWorkday(startWork, endWork, startMeeting, durationMinutes) {
   return meetingStartMinutes >= workStartMinutes && meetingEndMinutes <= workEndMinutes;
 }
 
+export {isMeetingInWorkday};
+
