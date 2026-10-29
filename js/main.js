@@ -1,4 +1,8 @@
-import { generateSimilarPhotos } from './data.js';
+import { similarPhotos } from './data.js';
+import { picturesContainer } from './miniature-rendering.js';
 
-generateSimilarPhotos();
+similarPhotos();
+
+console.log(similarPhotos());
+
 

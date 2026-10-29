@@ -38,7 +38,7 @@ const createPhotoDescription = (index) => {
 };
 
 // Функция для создания массива из 25 объектов
-const generateSimilarPhotos = () =>
+const similarPhotos = () =>
   Array.from({ length: SIMILAR_PHOTO_DESCRIPTION_COUNT }, (_, index) => createPhotoDescription(index));
 
-export {generateSimilarPhotos};
+export {similarPhotos};
