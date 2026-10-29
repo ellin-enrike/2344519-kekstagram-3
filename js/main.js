@@ -3,6 +3,4 @@ import { picturesContainer } from './miniature-rendering.js';
 
 similarPhotos();
 
-console.log(similarPhotos());
-
 

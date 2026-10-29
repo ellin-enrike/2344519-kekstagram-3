@@ -1,4 +1,4 @@
- import { similarPhotos } from "./data.js";
+import { similarPhotos } from './data.js';
 
 const similarPhotoTemplate = document.querySelector('#picture').content.querySelector('.picture');
 const picturesContainer = document.querySelector('.pictures');
@@ -15,11 +15,10 @@ photos.forEach(({ url, description, likes, comments }) => {
   photoElement.querySelector('.picture__comments').textContent = comments.length;
 
   similarPhotoFragment.append(photoElement);
-  // picturesContainer.append(photoElement);
 
 });
 
 picturesContainer.append(similarPhotoFragment);
 
 
-export { picturesContainer}
+export {picturesContainer};
