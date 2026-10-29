@@ -21,4 +21,3 @@ photos.forEach(({ url, description, likes, comments }) => {
 picturesContainer.append(similarPhotoFragment);
 
 
-export {picturesContainer};
