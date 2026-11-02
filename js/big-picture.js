@@ -1,4 +1,4 @@
-
+import { isEscapeKey } from "./utils.js";
 const bigPicture = document.querySelector('.big-picture');
 const bigPictureImg = bigPicture.querySelector('.big-picture__img img');
 const likesCount = bigPicture.querySelector('.likes-count');
@@ -71,10 +71,11 @@ const closeBigPicture = () => {
 export const onCloseButtonClick = () => {
   closeButton.addEventListener('click', closeBigPicture);
   document.addEventListener('keydown', (evt) => {
-    if (evt.key === 'Escape' || evt.key === 'Esc') {
+    if (isEscapeKey(evt)) {
       evt.preventDefault();
       closeBigPicture();
     }
   });
 };
 onCloseButtonClick();
+
