@@ -1,3 +1,5 @@
+// import {onCloseBigPictureClick} from './big-picture.js';
+
 // Функция для получения случайного целого числа в диапазоне [min, max]
 const getRandomInteger = (a, b) => {
   const lower = Math.ceil(Math.min(a, b));
@@ -14,4 +16,6 @@ function createIdGenerator() {
   };
 }
 
-export {getRandomInteger, createIdGenerator};
+const isEscapeKey = (evt) => evt.key === 'Escape';
+
+export {getRandomInteger, createIdGenerator, isEscapeKey};
