@@ -12,10 +12,11 @@ const renderPhoto = (photo) => {
   pictureElement.querySelector('.picture__likes').textContent = photo.likes;
   pictureElement.querySelector('.picture__comments').textContent = photo.comments.length;
 
-  pictureElement.addEventListener('click', (evt) => {
+  const onPictureElementClick = (evt) => {
     evt.preventDefault();
     openBigPicture(photo);
-  });
+  };
+  pictureElement.addEventListener('click', onPictureElementClick);
 
   return pictureElement;
 };
