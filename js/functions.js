@@ -46,25 +46,25 @@ getDigits(7);
 
 // Задача "Делу время"
 
-function isMeetingInWorkday(startWork, endWork, startMeeting, durationMinutes) {
+// function isMeetingInWorkday(startWork, endWork, startMeeting, durationMinutes) {
 
-  function timeToMinutes(timeStr) {
-    const normalized = timeStr.replace('.', ':');
-    const [hoursStr, minutesStr] = normalized.split(':');
+//   function timeToMinutes(timeStr) {
+//     const normalized = timeStr.replace('.', ':');
+//     const [hoursStr, minutesStr] = normalized.split(':');
 
-    const hours = Number(hoursStr);
-    const minutes = Number(minutesStr || 0);
+//     const hours = Number(hoursStr);
+//     const minutes = Number(minutesStr || 0);
 
-    return hours * 60 + minutes;
-  }
+//     return hours * 60 + minutes;
+//   }
 
-  const workStartMinutes = timeToMinutes(startWork);
-  const workEndMinutes = timeToMinutes(endWork);
-  const meetingStartMinutes = timeToMinutes(startMeeting);
-  const meetingEndMinutes = meetingStartMinutes + durationMinutes;
+//   const workStartMinutes = timeToMinutes(startWork);
+//   const workEndMinutes = timeToMinutes(endWork);
+//   const meetingStartMinutes = timeToMinutes(startMeeting);
+//   const meetingEndMinutes = meetingStartMinutes + durationMinutes;
 
-  return meetingStartMinutes >= workStartMinutes && meetingEndMinutes <= workEndMinutes;
-}
+//   return meetingStartMinutes >= workStartMinutes && meetingEndMinutes <= workEndMinutes;
+// }
 
-export {isMeetingInWorkday};
+// export {isMeetingInWorkday};
 
