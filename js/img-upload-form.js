@@ -1,5 +1,6 @@
 import { isEscapeKey } from './utils.js';
-
+import { resetScale } from './change-photo-scale.js';
+import { resetFilter } from './photo-filters.js';
 import {
   validateHashtagsFormat,
   validateHashtagsCount,
@@ -73,7 +74,8 @@ function onCloseImgFormBtnClick() {
 
   imgUploadForm.reset();
   pristine.reset();
-
+  resetScale();
+  resetFilter();
   document.removeEventListener('keydown', onEscKeyDown);
 }
 
