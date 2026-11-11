@@ -47,7 +47,7 @@ const renderNextComments = () => {
   shownCount.textContent = shownCommentsCount;
 
   if (shownCommentsCount >= currentComments.length) {
-    socialCommentCount.classList.add('hidden');
+
     commentLoader.classList.add('hidden');
   }
 };
@@ -72,6 +72,8 @@ const onLoaderClick = () => {
 const openBigPicture = (photo) => {
   bigPicture.classList.remove('hidden');
   body.classList.add('modal-open');
+
+  document.removeEventListener('keydown', onEscKeyDown);
   document.addEventListener('keydown', onEscKeyDown);
 
   bigPictureImg.src = photo.url;

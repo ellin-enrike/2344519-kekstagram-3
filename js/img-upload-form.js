@@ -7,6 +7,8 @@ import {
   validateHashtagsUniqueness,
   validateCommentLength,
 } from './validation.js';
+import { sendData } from './api.js';
+import { showSuccessMessage, showErrorMessage } from './user-modal.js';
 
 const bodyEl = document.body;
 const imgUploadInput = document.querySelector('.img-upload__input');
@@ -80,11 +82,24 @@ function onCloseImgFormBtnClick() {
 }
 
 const onImgUploadFormSubmit = (evt) => {
+  evt.preventDefault();
+
   const isValid = pristine.validate();
 
   if (!isValid) {
-    evt.preventDefault();
+    return;
   }
+
+  const formData = new FormData(imgUploadForm);
+
+  sendData(formData)
+    .then(() => {
+      showSuccessMessage();
+      onCloseImgFormBtnClick();
+    })
+    .catch(() => {
+      showErrorMessage();
+    });
 };
 
 imgUploadInput.addEventListener('change', showImgForm);
