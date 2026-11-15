@@ -1,6 +1,6 @@
+import { isEscapeKey } from './utils.js';
 const bodyElement = document.body;
-
-const isEscapeKey = (evt) => evt.key === 'Escape';
+const DELAY_TIME = 5000;
 
 const showMessage = (templateId, closeButtonClass) => {
   const template = document.querySelector(`#${templateId}`);
@@ -42,7 +42,7 @@ const showDataError = () => {
 
   setTimeout(() => {
     messageElement.remove();
-  }, 5000);
+  }, DELAY_TIME);
 };
 
 const showSuccessMessage = () => {
