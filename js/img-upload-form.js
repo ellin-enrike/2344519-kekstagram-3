@@ -27,28 +27,33 @@ const pristineConfig = {
 
 const pristine = new Pristine(imgUploadForm, pristineConfig, false);
 
+const HASHTAG_FORMAT_ERROR = 'Хештег должен начинаться с #, содержать только буквы и числа и иметь длину от 2 до 20 символов';
+const HASHTAG_COUNT_ERROR = 'Нельзя указать больше пяти хештегов';
+const HASHTAG_UNIQUENESS_ERROR = 'Хештеги не должны повторяться';
+const COMMENT_LENGTH_ERROR = 'Комментарий не должен превышать 140 символов';
+
 pristine.addValidator(
   hashTagFieldElement,
   validateHashtagsFormat,
-  'Хештег должен начинаться с #, содержать только буквы и числа и иметь длину от 2 до 20 символов'
+  HASHTAG_FORMAT_ERROR
 );
 
 pristine.addValidator(
   hashTagFieldElement,
   validateHashtagsCount,
-  'Нельзя указать больше пяти хештегов'
+  HASHTAG_COUNT_ERROR
 );
 
 pristine.addValidator(
   hashTagFieldElement,
   validateHashtagsUniqueness,
-  'Хештеги не должны повторяться'
+  HASHTAG_UNIQUENESS_ERROR
 );
 
 pristine.addValidator(
   commentFieldElement,
   validateCommentLength,
-  'Комментарий не должен превышать 140 символов'
+  COMMENT_LENGTH_ERROR
 );
 
 const onEscKeyDown = (evt) => {
