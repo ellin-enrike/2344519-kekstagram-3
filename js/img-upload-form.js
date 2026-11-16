@@ -10,7 +10,7 @@ import {
 import { sendData } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './user-modal.js';
 
-const FILE_TYPES= ['jpeg','jpg','png',];
+const FILE_TYPES = ['jpeg','jpg','png',];
 
 const bodyEl = document.body;
 const imgUploadInput = document.querySelector('.img-upload__input');
@@ -20,7 +20,6 @@ const imgUploadForm = document.querySelector('.img-upload__form');
 const hashTagFieldElement = document.querySelector('.text__hashtags');
 const commentFieldElement = document.querySelector('.text__description');
 const photoPreview = imgUploadForm.querySelector('.img-upload__preview img');
-const effectsPreviews = imgUploadForm.querySelector('.effects__preview');
 const fileChooser = imgUploadForm.querySelector('.img-upload__input');
 
 fileChooser.addEventListener('change', () => {
