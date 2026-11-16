@@ -20,16 +20,28 @@ const imgUploadForm = document.querySelector('.img-upload__form');
 const hashTagFieldElement = document.querySelector('.text__hashtags');
 const commentFieldElement = document.querySelector('.text__description');
 const photoPreview = imgUploadForm.querySelector('.img-upload__preview img');
+const effectsPreviews = imgUploadForm.querySelectorAll('.effects__preview');
 const fileChooser = imgUploadForm.querySelector('.img-upload__input');
 
 fileChooser.addEventListener('change', () => {
   const file = fileChooser.files[0];
-  const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-  if (matches) {
-    photoPreview.src = URL.createObjectURL(file);
+
+  if (!file) {
+    return;
   }
 
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(`.${it}`));
+
+  if (matches) {
+    const photoUrl = URL.createObjectURL(file);
+
+    photoPreview.src = photoUrl;
+
+    effectsPreviews.forEach((preview) => {
+      preview.style.backgroundImage = `url("${photoUrl}")`;
+    });
+  }
 });
 
 const pristineConfig = {
