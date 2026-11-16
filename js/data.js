@@ -3,7 +3,6 @@ import { USERS, COMMENTS, SIMILAR_PHOTO_DESCRIPTION_COUNT, AVATAR_COUNT, MIN_LIK
 
 const getUniqueCommentId = createIdGenerator();
 
-// Создание одного комментария
 const createUserComment = () => {
   const randomNameIndex = getRandomInteger(0, USERS.length - 1);
   const randomMessageIndex = getRandomInteger(0, COMMENTS.length - 1);
@@ -17,13 +16,11 @@ const createUserComment = () => {
   };
 };
 
-// Генерация массива комментариев для одной фотографии
 const generatePhotoComments = () => {
   const count = getRandomInteger(0, MAX_COMMENTS_QUANTITY);
   return Array.from({ length: count }, () => createUserComment());
 };
 
-// Создание описания одной фотографии
 const createPhotoDescription = (index) => {
 
   const id = index + 1;
@@ -37,7 +34,6 @@ const createPhotoDescription = (index) => {
   };
 };
 
-// Функция для создания массива из 25 объектов
 const similarPhotos = () =>
   Array.from({ length: SIMILAR_PHOTO_DESCRIPTION_COUNT }, (_, index) => createPhotoDescription(index));
 

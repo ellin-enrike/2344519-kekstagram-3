@@ -32,7 +32,6 @@ fileChooser.addEventListener('change', () => {
 
 });
 
-
 const pristineConfig = {
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--invalid',
