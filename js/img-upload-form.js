@@ -10,6 +10,8 @@ import {
 import { sendData } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './user-modal.js';
 
+const FILE_TYPES = ['jpeg','jpg','png',];
+
 const bodyEl = document.body;
 const imgUploadInput = document.querySelector('.img-upload__input');
 const imgUploadOverlay = document.querySelector('.img-upload__overlay');
@@ -17,6 +19,19 @@ const closeImgFormBtn = document.querySelector('.img-upload__cancel');
 const imgUploadForm = document.querySelector('.img-upload__form');
 const hashTagFieldElement = document.querySelector('.text__hashtags');
 const commentFieldElement = document.querySelector('.text__description');
+const photoPreview = imgUploadForm.querySelector('.img-upload__preview img');
+const fileChooser = imgUploadForm.querySelector('.img-upload__input');
+
+fileChooser.addEventListener('change', () => {
+  const file = fileChooser.files[0];
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
+  if (matches) {
+    photoPreview.src = URL.createObjectURL(file);
+  }
+
+});
+
 
 const pristineConfig = {
   classTo: 'img-upload__field-wrapper',
