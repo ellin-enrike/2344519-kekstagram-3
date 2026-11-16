@@ -25,7 +25,6 @@ const fileChooser = imgUploadForm.querySelector('.img-upload__input');
 
 fileChooser.addEventListener('change', () => {
   const file = fileChooser.files[0];
-
   if (!file) {
     return;
   }
