@@ -78,7 +78,6 @@ const onImgFiltersFormChange = (filterId) => {
   if (!currentFilter) {
     return;
   }
-
   renderPhotos(currentFilter());
 };
 
