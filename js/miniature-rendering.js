@@ -78,7 +78,6 @@ const onImgFiltersFormChange = (filterId) => {
   if (!currentFilter) {
     return;
   }
-
   renderPhotos(currentFilter());
 };
 
@@ -96,7 +95,6 @@ const onImgFiltersFormClick = (evt) => {
     .classList.remove('img-filters__button--active');
 
   button.classList.add('img-filters__button--active');
-
   debouncedRenderPhotos(button.id);
 };
 

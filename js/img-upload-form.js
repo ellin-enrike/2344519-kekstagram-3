@@ -10,28 +10,12 @@ import {
 import { sendData } from './api.js';
 import { showSuccessMessage, showErrorMessage } from './user-modal.js';
 
-const FILE_TYPES = ['jpeg','jpg','png',];
+const FILE_TYPES = ['jpeg', 'jpg', 'png'];
 
-const bodyEl = document.body;
-const imgUploadInput = document.querySelector('.img-upload__input');
-const imgUploadOverlay = document.querySelector('.img-upload__overlay');
-const closeImgFormBtn = document.querySelector('.img-upload__cancel');
-const imgUploadForm = document.querySelector('.img-upload__form');
-const hashTagFieldElement = document.querySelector('.text__hashtags');
-const commentFieldElement = document.querySelector('.text__description');
-const photoPreview = imgUploadForm.querySelector('.img-upload__preview img');
-const fileChooser = imgUploadForm.querySelector('.img-upload__input');
-
-fileChooser.addEventListener('change', () => {
-  const file = fileChooser.files[0];
-  const fileName = file.name.toLowerCase();
-  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
-  if (matches) {
-    photoPreview.src = URL.createObjectURL(file);
-  }
-
-});
-
+const HASHTAG_FORMAT_ERROR = 'Хештег должен начинаться с #, содержать только буквы и числа и иметь длину от 2 до 20 символов';
+const HASHTAG_COUNT_ERROR = 'Нельзя указать больше пяти хештегов';
+const HASHTAG_UNIQUENESS_ERROR = 'Хештеги не должны повторяться';
+const COMMENT_LENGTH_ERROR = 'Комментарий не должен превышать 140 символов';
 
 const pristineConfig = {
   classTo: 'img-upload__field-wrapper',
@@ -40,12 +24,18 @@ const pristineConfig = {
   errorTextClass: 'img-upload__field-wrapper--error',
 };
 
-const pristine = new Pristine(imgUploadForm, pristineConfig, false);
+const bodyElement = document.body;
+const imageUploadFormElement = document.querySelector('.img-upload__form');
+const imageUploadInputElement = imageUploadFormElement.querySelector('.img-upload__input');
+const imageUploadOverlayElement = imageUploadFormElement.querySelector('.img-upload__overlay');
+const closeImageFormButtonElement = imageUploadFormElement.querySelector('.img-upload__cancel');
+const submitButtonElement = imageUploadFormElement.querySelector('.img-upload__submit');
+const hashTagFieldElement = imageUploadFormElement.querySelector('.text__hashtags');
+const commentFieldElement = imageUploadFormElement.querySelector('.text__description');
+const imagePreviewElement = imageUploadFormElement.querySelector('.img-upload__preview img');
+const effectsPreviewElements = imageUploadFormElement.querySelectorAll('.effects__preview');
 
-const HASHTAG_FORMAT_ERROR = 'Хештег должен начинаться с #, содержать только буквы и числа и иметь длину от 2 до 20 символов';
-const HASHTAG_COUNT_ERROR = 'Нельзя указать больше пяти хештегов';
-const HASHTAG_UNIQUENESS_ERROR = 'Хештеги не должны повторяться';
-const COMMENT_LENGTH_ERROR = 'Комментарий не должен превышать 140 символов';
+const pristine = new Pristine(imageUploadFormElement, pristineConfig, false);
 
 pristine.addValidator(
   hashTagFieldElement,
@@ -74,7 +64,7 @@ pristine.addValidator(
 const onEscKeyDown = (evt) => {
   if (isEscapeKey(evt)) {
     evt.preventDefault();
-    onCloseImgFormBtnClick();
+    onCloseImageFormButtonClick();
   }
 };
 
@@ -84,25 +74,57 @@ const onTextFieldKeyDown = (evt) => {
   }
 };
 
-function showImgForm() {
-  imgUploadOverlay.classList.remove('hidden');
-  bodyEl.classList.add('modal-open');
+function showImageForm() {
+  imageUploadOverlayElement.classList.remove('hidden');
+  bodyElement.classList.add('modal-open');
   document.addEventListener('keydown', onEscKeyDown);
 }
 
-function onCloseImgFormBtnClick() {
-  imgUploadOverlay.classList.add('hidden');
-  bodyEl.classList.remove('modal-open');
+function onCloseImageFormButtonClick() {
+  imageUploadOverlayElement.classList.add('hidden');
+  bodyElement.classList.remove('modal-open');
 
-  imgUploadForm.reset();
+  imageUploadFormElement.reset();
   pristine.reset();
   resetScale();
   resetFilter();
+
   document.removeEventListener('keydown', onEscKeyDown);
 }
 
-const onImgUploadFormSubmit = (evt) => {
+const onImageUploadInputChange = () => {
+  const file = imageUploadInputElement.files[0];
+
+  if (!file) {
+    return;
+  }
+
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((fileType) =>
+    fileName.endsWith(`.${fileType}`)
+  );
+
+  if (!matches) {
+    return;
+  }
+
+  const photoUrl = URL.createObjectURL(file);
+
+  imagePreviewElement.src = photoUrl;
+
+  effectsPreviewElements.forEach((previewElement) => {
+    previewElement.style.backgroundImage = `url("${photoUrl}")`;
+  });
+
+  showImageForm();
+};
+
+const onImageUploadFormSubmit = (evt) => {
   evt.preventDefault();
+
+  if (submitButtonElement.disabled) {
+    return;
+  }
 
   const isValid = pristine.validate();
 
@@ -110,22 +132,27 @@ const onImgUploadFormSubmit = (evt) => {
     return;
   }
 
-  const formData = new FormData(imgUploadForm);
+  const formData = new FormData(imageUploadFormElement);
+
+  submitButtonElement.disabled = true;
 
   sendData(formData)
     .then(() => {
       showSuccessMessage();
-      onCloseImgFormBtnClick();
+      onCloseImageFormButtonClick();
     })
     .catch(() => {
       showErrorMessage();
+    })
+    .finally(() => {
+      submitButtonElement.disabled = false;
     });
 };
 
-imgUploadInput.addEventListener('change', showImgForm);
-closeImgFormBtn.addEventListener('click', onCloseImgFormBtnClick);
+imageUploadInputElement.addEventListener('change', onImageUploadInputChange);
+closeImageFormButtonElement.addEventListener('click', onCloseImageFormButtonClick);
 
 hashTagFieldElement.addEventListener('keydown', onTextFieldKeyDown);
 commentFieldElement.addEventListener('keydown', onTextFieldKeyDown);
 
-imgUploadForm.addEventListener('submit', onImgUploadFormSubmit);
+imageUploadFormElement.addEventListener('submit', onImageUploadFormSubmit);
