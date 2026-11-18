@@ -11,7 +11,6 @@ function createIdGenerator() {
     return lastId;
   };
 }
-
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 function debounce(callback, timeoutDelay = 500) {
