@@ -29,7 +29,11 @@ const showMessage = (templateId, closeButtonClass) => {
     messageElement.removeEventListener('click', onOutsideClick);
   }
 
-  closeButton.addEventListener('click', closeMessage);
+  const onCloseButtonClick = () => {
+    closeMessage();
+  };
+
+  closeButton.addEventListener('click', onCloseButtonClick);
   document.addEventListener('keydown', onMessageEscKeydown);
   messageElement.addEventListener('click', onOutsideClick);
 };

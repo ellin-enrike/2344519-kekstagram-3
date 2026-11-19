@@ -1,4 +1,4 @@
-const FilterParams = {
+const FilterParameters = {
   chrome: {
     min: 0,
     max: 1,
@@ -41,6 +41,10 @@ const effectLevelValueElement = document.querySelector('.effect-level__value');
 const effectSliderElement = document.querySelector('.effect-level__slider');
 const imagePreviewElement = document.querySelector('.img-upload__preview img');
 const effectsListElement = document.querySelector('.effects__list');
+let currentEffect = 'none';
+const noneEffectInputElement = effectsListElement.querySelector(
+  'input[value="none"]'
+);
 
 const slider = noUiSlider.create(effectSliderElement, {
   range: {
@@ -53,40 +57,37 @@ const slider = noUiSlider.create(effectSliderElement, {
 });
 
 const applyFilter = (value) => {
-  const currentEffect = effectsListElement.querySelector(
-    'input[name="effect"]:checked'
-  ).value;
 
-  const params = FilterParams[currentEffect];
+  const parameters = FilterParameters[currentEffect];
 
-  if (!params) {
+  if (!parameters) {
     imagePreviewElement.style.filter = '';
     effectLevelValueElement.value = '';
     return;
   }
 
-  const filterValue = params.format(value);
+  const filterValue = parameters.format(value);
 
   imagePreviewElement.style.filter = filterValue;
   effectLevelValueElement.value = value;
 };
 
-const setSlider = (params) => {
+const setSlider = (values) => {
   slider.updateOptions({
     range: {
-      min: params.min,
-      max: params.max,
+      min: values.min,
+      max: values.max,
     },
-    start: params.start,
-    step: params.step,
+    start: values.start,
+    step: values.step,
   });
 
-  effectLevelValueElement.value = params.start;
-  applyFilter(params.start);
+  effectLevelValueElement.value = values.start;
+  applyFilter(values.start);
 };
 
 const onEffectsListChange = (evt) => {
-  const currentEffect = evt.target.value;
+  currentEffect = evt.target.value;
 
   if (currentEffect === 'none') {
     imagePreviewElement.style.filter = '';
@@ -96,19 +97,17 @@ const onEffectsListChange = (evt) => {
   }
 
   effectLevelElement.classList.remove('hidden');
-  setSlider(FilterParams[currentEffect]);
+  setSlider(FilterParameters[currentEffect]);
 };
 
 const onSliderUpdate = (values, handle, unencoded) => {
-  applyFilter(Number(unencoded[0]));
+  applyFilter(unencoded[0]);
 };
 
 const resetFilter = () => {
-  const noneEffectInput = effectsListElement.querySelector(
-    'input[value="none"]'
-  );
+  currentEffect = 'none';
 
-  noneEffectInput.checked = true;
+  noneEffectInputElement.checked = true;
   imagePreviewElement.style.filter = '';
   effectLevelValueElement.value = '';
   effectLevelElement.classList.add('hidden');

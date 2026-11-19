@@ -11,6 +11,9 @@ const imgFiltersFormElement = document.querySelector('.img-filters__form');
 const pictureTemplate = document.querySelector('#picture').content.querySelector('.picture');
 
 let photos = [];
+let activeFilterButtonElement = imgFiltersFormElement.querySelector(
+  '.img-filters__button--active'
+);
 
 const renderPhoto = (photo) => {
   const pictureElement = pictureTemplate.cloneNode(true);
@@ -49,8 +52,9 @@ const getDefaultPhotos = () => photos;
 
 const getRandomPhotos = () => {
   const randomIndexes = [];
+  const photosCount = Math.min(RANDOM_PHOTOS_COUNT, photos.length);
 
-  while (randomIndexes.length < RANDOM_PHOTOS_COUNT) {
+  while (randomIndexes.length < photosCount) {
     const randomIndex = getRandomInteger(0, photos.length - 1);
 
     if (!randomIndexes.includes(randomIndex)) {
@@ -90,11 +94,11 @@ const onImgFiltersFormClick = (evt) => {
     return;
   }
 
-  imgFiltersFormElement
-    .querySelector('.img-filters__button--active')
-    .classList.remove('img-filters__button--active');
+  activeFilterButtonElement.classList.remove('img-filters__button--active');
 
   button.classList.add('img-filters__button--active');
+  activeFilterButtonElement = button;
+
   debouncedRenderPhotos(button.id);
 };
 

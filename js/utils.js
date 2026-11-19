@@ -1,16 +1,10 @@
-const getRandomInteger = (a, b) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a, b));
+const getRandomInteger = (minValue, maxValue) => {
+  const lower = Math.ceil(Math.min(minValue, maxValue));
+  const upper = Math.floor(Math.max(minValue, maxValue));
+
   return Math.floor(Math.random() * (upper - lower + 1) + lower);
 };
 
-function createIdGenerator() {
-  let lastId = 0;
-  return function() {
-    lastId += 1;
-    return lastId;
-  };
-}
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 function debounce(callback, timeoutDelay = 500) {
@@ -23,6 +17,6 @@ function debounce(callback, timeoutDelay = 500) {
   };
 }
 
-export {getRandomInteger, createIdGenerator, isEscapeKey, debounce};
+export {getRandomInteger, isEscapeKey, debounce};
 
 
